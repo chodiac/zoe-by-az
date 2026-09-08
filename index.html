@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="sr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ZOE by AZ — Bezvremena ženstvenost</title>
+<meta name="description" content="ZOE by AZ — ženska modna kuća iz Beograda. Haljine stvorene da se pamte.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script>
+  /* dev flag: ?motion forces full motion even where the browser
+     hard-codes prefers-reduced-motion (e.g. headless/in-app browsers). */
+  if (new URLSearchParams(location.search).has("motion")) {
+    document.documentElement.classList.add("force-motion");
+  }
+</script>
+</head>
+<body>
+
+<!-- ============================================================
+     A11Y: skip link
+============================================================ -->
+<a class="skip" href="#house">Preskoči na sadržaj</a>
+
+<!-- ============================================================
+     BACKGROUND LAYER — interpolates colour between scenes
+============================================================ -->
+<div id="bg" aria-hidden="true"></div>
+
+<!-- ============================================================
+     LOADER — fashion-show opening
+============================================================ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__inner">
+    <div class="loader__lockup">
+      <span class="loader__line"><span>ZOE</span></span>
+      <span class="loader__line loader__line--sm"><span><em>by</em> AZ</span></span>
+    </div>
+    <div class="loader__rule" aria-hidden="true"></div>
+    <div class="loader__meta">
+      <span>BEOGRAD — SRBIJA</span>
+      <span>EST. MMXX</span>
+    </div>
+  </div>
+  <div class="loader__curtain" aria-hidden="true"></div>
+</div>
+
+<!-- ============================================================
+     CUSTOM CURSOR (desktop, pointer:fine only)
+============================================================ -->
+<div class="cursor" id="cursor" aria-hidden="true">
+  <span class="cursor__dot"></span>
+  <span class="cursor__ring"><span class="cursor__label"></span></span>
+</div>
+
+<!-- ============================================================
+     NAVIGATION — minimal, floating, sits over hero
+============================================================ -->
+<header class="nav" id="nav">
+  <a class="nav__logo" href="#top" data-magnetic data-cursor="link" aria-label="ZOE by AZ — početna">
+    <span>ZOE</span><span class="nav__logo-sm">BY AZ</span>
+  </a>
+  <nav class="nav__links" aria-label="Glavna navigacija">
+    <a href="#collection" class="nav__link" data-cursor="link"><span>KOLEKCIJA</span></a>
+    <a href="#house" class="nav__link" data-cursor="link"><span>O NAMA</span></a>
+    <a href="#atelier" class="nav__link" data-cursor="link"><span>ATELJE</span></a>
+    <a href="#contact" class="nav__link" data-cursor="link"><span>KONTAKT</span></a>
+  </nav>
+  <button class="nav__menu" id="menuOpen" data-cursor="link" aria-expanded="false" aria-controls="menu">
+    <span class="nav__menu-txt"><span>MENI</span></span>
+    <span class="nav__menu-mark" aria-hidden="true"><i></i><i></i></span>
+  </button>
+</header>
+
+<!-- ============================================================
+     FULLSCREEN MENU
+============================================================ -->
+<div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Meni" aria-hidden="true">
+  <div class="menu__bg" aria-hidden="true"></div>
+  <div class="menu__head">
+    <span class="menu__tag">ZOE BY AZ — MENI</span>
+    <button class="menu__close" id="menuClose" data-cursor="link" aria-label="Zatvori meni">
+      <span>ZATVORI</span><i aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <nav class="menu__nav" aria-label="Meni navigacija">
+    <a class="menu__item" href="#collection" data-preview="MENU_01" data-cursor="link">
+      <span class="menu__idx">01</span>
+      <span class="menu__word"><span>Kolekcija</span></span>
+      <span class="menu__note">Večernje i svečane siluete</span>
+    </a>
+    <a class="menu__item" href="#house" data-preview="MENU_02" data-cursor="link">
+      <span class="menu__idx">02</span>
+      <span class="menu__word"><span>Priča</span></span>
+      <span class="menu__note">Kuća i njena filozofija</span>
+    </a>
+    <a class="menu__item" href="#founder" data-preview="MENU_03" data-cursor="link">
+      <span class="menu__idx">03</span>
+      <span class="menu__word"><span>Ankica</span></span>
+      <span class="menu__note">Lični potpis brenda</span>
+    </a>
+    <a class="menu__item" href="#atelier" data-preview="MENU_04" data-cursor="link">
+      <span class="menu__idx">04</span>
+      <span class="menu__word"><span>Atelje</span></span>
+      <span class="menu__note">Krojenje s namerom</span>
+    </a>
+    <a class="menu__item" href="#contact" data-preview="MENU_05" data-cursor="link">
+      <span class="menu__idx">05</span>
+      <span class="menu__word"><span>Kontakt</span></span>
+      <span class="menu__note">Termini i dostupnost</span>
+    </a>
+  </nav>
+
+  <!-- MENU_01..05 — hover preview — recommended 1200×1500 portrait -->
+  <figure class="menu__preview media" data-media="MENU_01" data-dim="1200×1500" data-ratio="4 / 5" aria-hidden="true"></figure>
+
+  <div class="menu__foot">
+    <a href="https://www.instagram.com/zoebyaz/" target="_blank" rel="noopener" data-cursor="link">INSTAGRAM ↗</a>
+    <span>BEOGRAD — SRBIJA</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     SCROLL PROGRESS — thin line + running index (NN / 12)
+============================================================ -->
+<div class="progress" id="progress" aria-hidden="true">
+  <span class="progress__num" id="progressNum">01</span>
+  <span class="progress__track"><span class="progress__fill" id="progressFill"></span></span>
+  <span class="progress__total">12</span>
+</div>
+
+<main id="top">
+
+  <!-- ========================================================
+       01 — HERO
+  ======================================================== -->
+  <section class="hero" id="hero" data-index="1" data-bg="#F5F2EB">
+    <div class="hero__frame">
+      <!-- HERO_01 — campaign image — portrait/landscape — recommended 2400×1600 -->
+      <figure class="hero__media media" data-media="HERO_01" data-dim="2400×1600" data-ratio="3 / 2" data-static></figure>
+    </div>
+
+    <span class="hero__brand hero__brand--zoe" aria-hidden="true">ZOE</span>
+    <span class="hero__brand hero__brand--byaz" aria-hidden="true">BY AZ</span>
+
+    <h1 class="hero__headline">
+      <span class="line"><span>Stvorena</span></span>
+      <span class="line"><span><em>da ostane.</em></span></span>
+    </h1>
+
+    <p class="hero__meta hero__meta--tl">
+      <span>BEOGRAD</span><span>SRBIJA</span>
+    </p>
+    <p class="hero__meta hero__meta--br">
+      <span>BEZVREMENA ŽENSTVENOST</span><span>STVORENO DA SE PAMTI</span>
+    </p>
+
+    <span class="hero__scroll" aria-hidden="true"><i></i>SCROLL</span>
+  </section>
+
+  <!-- ========================================================
+       02 — BRAND STATEMENT / THE HOUSE
+  ======================================================== -->
+  <section class="house" id="house" data-index="2" data-bg="#F5F2EB">
+    <p class="label"><span>ZOE BY AZ</span><span>01 — KUĆA</span></p>
+    <h2 class="house__statement">
+      <span class="line"><span>Haljina nije samo</span></span>
+      <span class="line"><span>ono što nosiš.</span></span>
+      <span class="line"><span>To je ono</span></span>
+      <span class="line"><span><em>što pamtiš.</em></span></span>
+    </h2>
+    <p class="house__body reveal-lines">
+      Radimo sa idejom trajnosti — kroj koji ostaje relevantan
+      dugo pošto trenutak prođe. Bez buke, bez viška.
+    </p>
+  </section>
+
+  <!-- ========================================================
+       03 — EDITORIAL FLOATING MEDIA
+  ======================================================== -->
+  <section class="editorial" id="editorial" data-index="3" data-bg="#EFE9DF">
+    <p class="editorial__tag label"><span>POGLED IZBLIZA</span><span>A CLOSER LOOK</span></p>
+
+    <div class="editorial__sticky">
+      <h3 class="editorial__head">
+        <span class="line"><span>Silueta ima</span></span>
+        <span class="line"><span><em>svoj jezik.</em></span></span>
+      </h3>
+    </div>
+
+    <!-- EDITORIAL_01 — portrait detail — recommended 1400×1750 -->
+    <figure class="editorial__fig editorial__fig--a media" data-media="EDITORIAL_01" data-dim="1400×1750" data-ratio="4 / 5" data-reveal="up" data-parallax="-9" data-cursor="view"></figure>
+    <!-- EDITORIAL_02 — tall campaign — recommended 1200×1800 -->
+    <figure class="editorial__fig editorial__fig--b media" data-media="EDITORIAL_02" data-dim="1200×1800" data-ratio="2 / 3" data-reveal="up" data-parallax="6" data-cursor="view"></figure>
+    <!-- EDITORIAL_03 — fabric / detail crop — recommended 1200×1200 -->
+    <figure class="editorial__fig editorial__fig--c media" data-media="EDITORIAL_03" data-dim="1200×1200" data-ratio="1 / 1" data-reveal="left" data-parallax="-5" data-cursor="view"></figure>
+    <!-- EDITORIAL_04 — wide campaign frame — recommended 2400×1400 -->
+    <figure class="editorial__fig editorial__fig--d media" data-media="EDITORIAL_04" data-dim="2400×1400" data-ratio="12 / 7" data-reveal="up" data-parallax="4" data-cursor="view"></figure>
+
+    <p class="editorial__note reveal-lines">
+      Detalj se ne vidi odmah. Oseti se kada haljina počne da se kreće.
+    </p>
+  </section>
+
+  <!-- ========================================================
+       04+05 — COLLECTION INTRO + HORIZONTAL COLLECTION
+  ======================================================== -->
+  <section class="collection" id="collection" data-index="4" data-bg="#F5F2EB">
+    <div class="collection__intro">
+      <p class="label"><span>ZOE BY AZ</span><span>02 — KOLEKCIJA</span></p>
+      <h2 class="collection__title">
+        <span class="line"><span>Dizajnirano</span></span>
+        <span class="line"><span><em>za prisustvo.</em></span></span>
+      </h2>
+      <p class="collection__lead reveal-lines">
+        Četiri linije, jedan potpis. Svaka počinje od tela i završava se
+        u načinu na koji žena ulazi u prostoriju.
+      </p>
+    </div>
+
+    <div class="hcol" data-hcol data-index="5" aria-label="Kolekcija — horizontalni pregled">
+      <div class="hcol__viewport">
+        <div class="hcol__track" data-hcol-track>
+
+          <article class="slide slide--a">
+            <span class="slide__num">01</span>
+            <div class="slide__type">
+              <h3 class="slide__name">Veče</h3>
+              <p class="slide__desc">Duge linije, otvorena leđa, težina svile. Za trenutke koji se pamte.</p>
+              <a class="link" href="#contact" data-cursor="link"><span>ISTRAŽI</span><i>→</i></a>
+            </div>
+            <!-- COLLECTION_01 — vertical look — recommended 1600×2200 -->
+            <figure class="slide__media media" data-media="COLLECTION_01" data-dim="1600×2200" data-ratio="8 / 11" data-cursor="view"></figure>
+          </article>
+
+          <article class="slide slide--b">
+            <!-- COLLECTION_02 — vertical look — recommended 1600×2200 -->
+            <figure class="slide__media media" data-media="COLLECTION_02" data-dim="1600×2200" data-ratio="8 / 11" data-cursor="view"></figure>
+            <div class="slide__type">
+              <h3 class="slide__name">Svečano</h3>
+              <p class="slide__desc">Strukturirani struk, čista ramena. Krojevi koji drže stav.</p>
+              <a class="link" href="#contact" data-cursor="link"><span>ISTRAŽI</span><i>→</i></a>
+            </div>
+            <span class="slide__num">02</span>
+          </article>
+
+          <article class="slide slide--a">
+            <span class="slide__num">03</span>
+            <div class="slide__type">
+              <h3 class="slide__name">Signature</h3>
+              <p class="slide__desc">Prepoznatljiva silueta kuće. Minimalna, precizna, bezvremena.</p>
+              <a class="link" href="#contact" data-cursor="link"><span>ISTRAŽI</span><i>→</i></a>
+            </div>
+            <!-- COLLECTION_03 — vertical look — recommended 1600×2200 -->
+            <figure class="slide__media media" data-media="COLLECTION_03" data-dim="1600×2200" data-ratio="8 / 11" data-cursor="view"></figure>
+          </article>
+
+          <article class="slide slide--b">
+            <!-- COLLECTION_04 — vertical look — recommended 1600×2200 -->
+            <figure class="slide__media media" data-media="COLLECTION_04" data-dim="1600×2200" data-ratio="8 / 11" data-cursor="view"></figure>
+            <div class="slide__type">
+              <h3 class="slide__name">Nova kolekcija</h3>
+              <p class="slide__desc">Sledeće poglavlje. Uskoro — po dogovoru i najavi.</p>
+              <a class="link" href="#contact" data-cursor="link"><span>NAJAVA</span><i>→</i></a>
+            </div>
+            <span class="slide__num">04</span>
+          </article>
+
+        </div>
+      </div>
+      <span class="hcol__hint" aria-hidden="true">DRAG / SCROLL</span>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       06 — THE WOMAN
+  ======================================================== -->
+  <section class="woman" id="woman" data-index="6" data-bg="#EFE9DF">
+    <div class="woman__sticky">
+      <p class="label"><span>ZOE BY AZ</span><span>03 — ŽENA</span></p>
+      <h2 class="woman__statement">
+        <span class="line"><span>Ne oblači se</span></span>
+        <span class="line"><span>da uđe u</span></span>
+        <span class="line"><span>prostoriju.</span></span>
+        <span class="line"><span><em>Oblači se da je</em></span></span>
+        <span class="line"><span><em>definiše.</em></span></span>
+      </h2>
+    </div>
+    <!-- WOMAN_01 — portrait — recommended 1600×2200 -->
+    <figure class="woman__media media" data-media="WOMAN_01" data-dim="1600×2200" data-ratio="8 / 11" data-reveal="up" data-cursor="view"></figure>
+  </section>
+
+  <!-- ========================================================
+       07 — ANKICA ŽIVKOVIĆ / FOUNDER
+  ======================================================== -->
+  <section class="founder" id="founder" data-index="7" data-bg="#E7E1D4">
+    <div class="founder__stage" data-founder>
+      <span class="founder__name founder__name--first" aria-hidden="true">ANKICA</span>
+      <!-- ANKICA_01 — portrait — recommended 1600×2200 -->
+      <figure class="founder__portrait media" data-media="ANKICA_01" data-dim="1600×2200" data-ratio="8 / 11"></figure>
+      <span class="founder__name founder__name--last" aria-hidden="true">ŽIVKOVIĆ</span>
+    </div>
+    <div class="founder__copy">
+      <h2 class="visually-hidden">Ankica Živković</h2>
+      <p class="label"><span>ZOE BY AZ</span><span>04 — AUTORKA</span></p>
+      <p class="founder__lead reveal-lines">
+        ZOE by AZ nosi lični potpis Ankice Živković — viziju oblikovanu oko
+        ženstvenosti, samopouzdanja i prisustva koje žena stvara kada uđe u prostoriju.
+      </p>
+      <a class="link" href="https://www.instagram.com/zivkovic.ankica/" target="_blank" rel="noopener" data-cursor="link"><span>@zivkovic.ankica</span><i>↗</i></a>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       08 — PRINCIPLES / WHY ZOE
+  ======================================================== -->
+  <section class="values" id="values" data-index="8" data-bg="#F5F2EB">
+    <p class="label values__label"><span>ZOE BY AZ</span><span>05 — NAČELA</span></p>
+    <div class="values__list" data-values>
+      <article class="value">
+        <span class="value__num">01</span>
+        <h3 class="value__word"><span class="line"><span>Forma</span></span></h3>
+        <p class="value__desc">Kroj počinje od tela. Sve ostalo je posledica.</p>
+        <!-- VALUE_01 — detail — recommended 1200×1500 -->
+        <figure class="value__media media" data-media="VALUE_01" data-dim="1200×1500" data-ratio="4 / 5" data-reveal="right"></figure>
+      </article>
+      <article class="value">
+        <span class="value__num">02</span>
+        <h3 class="value__word"><span class="line"><span>Pokret</span></span></h3>
+        <p class="value__desc">Materijal koji prati korak, a ne obrnuto.</p>
+        <!-- VALUE_02 — detail — recommended 1200×1500 -->
+        <figure class="value__media media" data-media="VALUE_02" data-dim="1200×1500" data-ratio="4 / 5" data-reveal="right"></figure>
+      </article>
+      <article class="value">
+        <span class="value__num">03</span>
+        <h3 class="value__word"><span class="line"><span>Detalj</span></span></h3>
+        <p class="value__desc">Šav, rub, zatvarač. Ono što se ne vidi na prvi pogled.</p>
+        <!-- VALUE_03 — detail — recommended 1200×1500 -->
+        <figure class="value__media media" data-media="VALUE_03" data-dim="1200×1500" data-ratio="4 / 5" data-reveal="right"></figure>
+      </article>
+      <article class="value">
+        <span class="value__num">04</span>
+        <h3 class="value__word"><span class="line"><span>Prisustvo</span></span></h3>
+        <p class="value__desc">Prostorija se menja kada ona uđe. To je merilo.</p>
+        <!-- VALUE_04 — detail — recommended 1200×1500 -->
+        <figure class="value__media media" data-media="VALUE_04" data-dim="1200×1500" data-ratio="4 / 5" data-reveal="right"></figure>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       09 — TYPOGRAPHIC INTERLUDE
+  ======================================================== -->
+  <section class="interlude" id="interlude" data-index="9" data-bg="#181816">
+    <div class="interlude__row interlude__row--1" data-marquee="-1" aria-hidden="true">
+      <span>ZOE BY AZ — ZOE BY AZ — ZOE BY AZ — ZOE BY AZ — </span>
+      <span>ZOE BY AZ — ZOE BY AZ — ZOE BY AZ — ZOE BY AZ — </span>
+    </div>
+    <!-- INTERLUDE_01 — narrow campaign video / image strip — recommended 2400×900 -->
+    <figure class="interlude__media media media--dark" data-media="INTERLUDE_01" data-dim="2400×900" data-ratio="8 / 3" data-reveal="center"></figure>
+    <div class="interlude__row interlude__row--2" data-marquee="1" aria-hidden="true">
+      <span><em>da ostane</em> — <em>da ostane</em> — <em>da ostane</em> — </span>
+      <span><em>da ostane</em> — <em>da ostane</em> — <em>da ostane</em> — </span>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       10 — SELECTED LOOKS
+  ======================================================== -->
+  <section class="looks" id="looks" data-index="10" data-bg="#F5F2EB">
+    <header class="looks__head">
+      <p class="label"><span>ZOE BY AZ</span><span>06 — IZABRANI KROJEVI</span></p>
+      <h2 class="looks__title">
+        <span class="line"><span>Izabrani</span></span>
+        <span class="line"><span><em>krojevi.</em></span></span>
+      </h2>
+    </header>
+
+    <div class="looks__grid" data-looks>
+      <!-- LOOK_01 — large portrait — recommended 1600×2200 -->
+      <figure class="look look--1 media" data-media="LOOK_01" data-dim="1600×2200" data-ratio="8 / 11" data-reveal="up" data-cursor="view"
+        data-look-name="Vera" data-look-collection="Signature" data-look-no="01"
+        data-look-desc="Duga kolona, otvorena leđa, minimalna konstrukcija.">
+      </figure>
+      <!-- LOOK_02 — small square detail — recommended 1200×1200 -->
+      <figure class="look look--2 media" data-media="LOOK_02" data-dim="1200×1200" data-ratio="1 / 1" data-reveal="left" data-cursor="view"
+        data-look-name="Detalj rukava" data-look-collection="Atelje" data-look-no="02"
+        data-look-desc="Ručno postavljen šav i rub bez vidljivog boda.">
+      </figure>
+      <!-- LOOK_03 — tall portrait — recommended 1400×2100 -->
+      <figure class="look look--3 media" data-media="LOOK_03" data-dim="1400×2100" data-ratio="2 / 3" data-reveal="up" data-cursor="view"
+        data-look-name="Mira" data-look-collection="Veče" data-look-no="03"
+        data-look-desc="Kroj po telu do struka, potom slobodan pad svile.">
+      </figure>
+      <!-- LOOK_04 — huge landscape — recommended 2400×1500 -->
+      <figure class="look look--4 media" data-media="LOOK_04" data-dim="2400×1500" data-ratio="8 / 5" data-reveal="right" data-cursor="view"
+        data-look-name="Kampanja I" data-look-collection="Nova kolekcija" data-look-no="04"
+        data-look-desc="Pokret u kadru — silueta koja se čita s razdaljine.">
+      </figure>
+      <!-- LOOK_05 — detail crop — recommended 1200×1500 -->
+      <figure class="look look--5 media" data-media="LOOK_05" data-dim="1200×1500" data-ratio="4 / 5" data-reveal="up" data-cursor="view"
+        data-look-name="Tekstura" data-look-collection="Signature" data-look-no="05"
+        data-look-desc="Mat svila sa suvim padom i toplim tonom.">
+      </figure>
+      <!-- LOOK_06 — portrait — recommended 1500×2000 -->
+      <figure class="look look--6 media" data-media="LOOK_06" data-dim="1500×2000" data-ratio="3 / 4" data-reveal="up" data-cursor="view"
+        data-look-name="Nina" data-look-collection="Svečano" data-look-no="06"
+        data-look-desc="Strukturiran struk, čista ramena, precizan izrez.">
+      </figure>
+      <!-- LOOK_07 — narrow portrait — recommended 1100×1700 -->
+      <figure class="look look--7 media" data-media="LOOK_07" data-dim="1100×1700" data-ratio="11 / 17" data-reveal="left" data-cursor="view"
+        data-look-name="Lea" data-look-collection="Veče" data-look-no="07"
+        data-look-desc="Uska linija, dubok izrez na leđima, bez ukrasa.">
+      </figure>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       11 — ATELIER / CRAFT
+  ======================================================== -->
+  <section class="atelier" id="atelier" data-index="11" data-bg="#EFE9DF">
+    <p class="label"><span>ZOE BY AZ</span><span>07 — ATELJE</span></p>
+    <h2 class="atelier__head">
+      <span class="line"><span>Stvoreno</span></span>
+      <span class="line"><span>s</span></span>
+      <span class="line"><span><em>namerom.</em></span></span>
+    </h2>
+    <div class="atelier__row">
+      <!-- ATELIER_01 — fabric — recommended 1200×1500 -->
+      <figure class="atelier__fig media" data-media="ATELIER_01" data-dim="1200×1500" data-ratio="4 / 5" data-reveal="up" data-parallax="-5"></figure>
+      <!-- ATELIER_02 — seam / hands — recommended 1200×1500 -->
+      <figure class="atelier__fig media" data-media="ATELIER_02" data-dim="1200×1500" data-ratio="4 / 5" data-reveal="up" data-parallax="5"></figure>
+      <!-- ATELIER_03 — silhouette on stand — recommended 1200×1500 -->
+      <figure class="atelier__fig media" data-media="ATELIER_03" data-dim="1200×1500" data-ratio="4 / 5" data-reveal="up" data-parallax="-3"></figure>
+    </div>
+    <p class="atelier__body reveal-lines">
+      Radimo sporije nego što bi trebalo. Svaki kroj prođe kroz probu,
+      pauzu i još jednu probu pre nego što dobije ime.
+    </p>
+  </section>
+
+  <!-- ========================================================
+       12 — PINNED DETAIL SEQUENCE
+  ======================================================== -->
+  <section class="seq" id="seq" data-index="12" data-bg="#EFE9DF" aria-label="Detalji kroja">
+    <div class="seq__stage" data-seq>
+      <ol class="seq__index" aria-hidden="true">
+        <li><span>01</span> Silueta</li>
+        <li><span>02</span> Tekstura</li>
+        <li><span>03</span> Detalj</li>
+        <li><span>04</span> Pokret</li>
+      </ol>
+
+      <div class="seq__frame">
+        <!-- DETAIL_01..04 — central sequence — recommended 1600×2000 -->
+        <figure class="seq__media media" data-media="DETAIL_01" data-dim="1600×2000" data-ratio="4 / 5"></figure>
+        <figure class="seq__media media" data-media="DETAIL_02" data-dim="1600×2000" data-ratio="4 / 5"></figure>
+        <figure class="seq__media media" data-media="DETAIL_03" data-dim="1600×2000" data-ratio="4 / 5"></figure>
+        <figure class="seq__media media" data-media="DETAIL_04" data-dim="1600×2000" data-ratio="4 / 5"></figure>
+      </div>
+
+      <div class="seq__desc">
+        <p data-seq-desc>Linija ramena i struka postavlja ceo kroj. Sve kreće odatle.</p>
+        <p data-seq-desc>Mat svila sa suvim padom — tkanina drži oblik bez potpore.</p>
+        <p data-seq-desc>Rub bez vidljivog boda, zatvarač skriven u šavu.</p>
+        <p data-seq-desc>Kada se telo pokrene, tkanina kasni pola koraka. Namerno.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       13 — QUOTE
+  ======================================================== -->
+  <section class="quote" id="quote" data-index="13" data-bg="#F5F2EB">
+    <blockquote class="quote__text">
+      <span class="line"><span>Elegancija počinje</span></span>
+      <span class="line"><span>pre nego što je</span></span>
+      <span class="line"><span><em>reč izgovorena.</em></span></span>
+    </blockquote>
+    <cite class="quote__cite">ZOE BY AZ</cite>
+  </section>
+
+  <!-- ========================================================
+       14 — INSTAGRAM / FOLLOW THE STORY
+  ======================================================== -->
+  <section class="social" id="social" data-index="14" data-bg="#EFE9DF">
+    <header class="social__head">
+      <p class="label"><span>ZOE BY AZ</span><span>08 — PRIČA</span></p>
+      <h2 class="social__title">Prati priču <a href="https://www.instagram.com/zoebyaz/" target="_blank" rel="noopener" data-cursor="link">@zoebyaz</a></h2>
+    </header>
+    <div class="social__row" data-social>
+      <!-- INSTAGRAM_01..06 — square-ish feed frames — recommended 1200×1500 -->
+      <figure class="social__fig media" data-media="INSTAGRAM_01" data-dim="1200×1500" data-ratio="4 / 5" data-cursor="view"></figure>
+      <figure class="social__fig media" data-media="INSTAGRAM_02" data-dim="1200×1200" data-ratio="1 / 1" data-cursor="view"></figure>
+      <figure class="social__fig media" data-media="INSTAGRAM_03" data-dim="1200×1600" data-ratio="3 / 4" data-cursor="view"></figure>
+      <figure class="social__fig media" data-media="INSTAGRAM_04" data-dim="1200×1500" data-ratio="4 / 5" data-cursor="view"></figure>
+      <figure class="social__fig media" data-media="INSTAGRAM_05" data-dim="1200×1200" data-ratio="1 / 1" data-cursor="view"></figure>
+      <figure class="social__fig media" data-media="INSTAGRAM_06" data-dim="1200×1600" data-ratio="3 / 4" data-cursor="view"></figure>
+    </div>
+    <a class="link link--lg" href="https://www.instagram.com/zoebyaz/" target="_blank" rel="noopener" data-cursor="link" data-magnetic>
+      <span>PRATI NA INSTAGRAMU</span><i>↗</i>
+    </a>
+  </section>
+
+  <!-- ========================================================
+       15 — CONTACT / APPOINTMENT
+  ======================================================== -->
+  <section class="contact" id="contact" data-index="15" data-bg="#F5F2EB">
+    <p class="label"><span>ZOE BY AZ</span><span>09 — KONTAKT</span></p>
+    <h2 class="contact__head">
+      <span class="line"><span>Pronađi</span></span>
+      <span class="line"><span>svoju</span></span>
+      <span class="line"><span><em>ZOE.</em></span></span>
+    </h2>
+    <p class="contact__lead reveal-lines">
+      Za kolekcije, dostupnost i termine u ateljeu — javite se.
+    </p>
+
+    <form class="form" id="form" novalidate>
+      <div class="form__field">
+        <label for="f-name">Ime i prezime</label>
+        <input type="text" id="f-name" name="name" autocomplete="name">
+        <span class="form__line" aria-hidden="true"></span>
+      </div>
+      <div class="form__field">
+        <label for="f-email">Email</label>
+        <input type="email" id="f-email" name="email" autocomplete="email">
+        <span class="form__line" aria-hidden="true"></span>
+      </div>
+      <div class="form__field">
+        <label for="f-phone">Telefon</label>
+        <input type="tel" id="f-phone" name="phone" autocomplete="tel">
+        <span class="form__line" aria-hidden="true"></span>
+      </div>
+
+      <fieldset class="form__choice">
+        <legend>Interesovanje</legend>
+        <label><input type="radio" name="interest" value="kolekcija" checked><span>Kolekcija</span></label>
+        <label><input type="radio" name="interest" value="custom"><span>Custom upit</span></label>
+        <label><input type="radio" name="interest" value="termin"><span>Termin</span></label>
+        <label><input type="radio" name="interest" value="drugo"><span>Drugo</span></label>
+      </fieldset>
+
+      <div class="form__field form__field--wide">
+        <label for="f-msg">Poruka</label>
+        <textarea id="f-msg" name="message" rows="1"></textarea>
+        <span class="form__line" aria-hidden="true"></span>
+      </div>
+
+      <button type="submit" class="form__submit link link--lg" data-magnetic data-cursor="link">
+        <span>POŠALJI UPIT</span><i>→</i>
+      </button>
+      <p class="form__status" id="formStatus" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER — final scene
+============================================================ -->
+<footer class="footer" id="footer" data-bg="#181816">
+  <div class="footer__brand" aria-hidden="true">
+    <span class="footer__zoe">ZOE</span>
+    <span class="footer__byaz">BY AZ</span>
+  </div>
+
+  <div class="footer__grid">
+    <nav class="footer__nav" aria-label="Podnožje navigacija">
+      <a href="#collection" data-cursor="link">Kolekcija</a>
+      <a href="#house" data-cursor="link">O nama</a>
+      <a href="#contact" data-cursor="link">Kontakt</a>
+      <a href="https://www.instagram.com/zoebyaz/" target="_blank" rel="noopener" data-cursor="link">Instagram ↗</a>
+    </nav>
+    <div class="footer__meta">
+      <span>BEOGRAD — SRBIJA</span>
+      <span>© 2026 ZOE BY AZ. Sva prava zadržana.</span>
+    </div>
+    <button class="footer__top" id="toTop" data-cursor="link" data-magnetic>
+      <span>NA VRH</span><i aria-hidden="true">↑</i>
+    </button>
+  </div>
+</footer>
+
+<!-- ============================================================
+     LOOK DETAIL OVERLAY
+============================================================ -->
+<div class="lookbox" id="lookbox" role="dialog" aria-modal="true" aria-label="Detalj kroja" aria-hidden="true">
+  <div class="lookbox__bg" aria-hidden="true"></div>
+  <button class="lookbox__close" id="lookClose" data-cursor="link" aria-label="Zatvori"><span>ZATVORI</span><i aria-hidden="true"></i></button>
+  <div class="lookbox__stage" id="lookStage"></div>
+  <div class="lookbox__info">
+    <span class="lookbox__no" id="lookNo">LOOK 01</span>
+    <h3 class="lookbox__name" id="lookName">—</h3>
+    <span class="lookbox__coll" id="lookColl">—</span>
+    <p class="lookbox__desc" id="lookDesc">—</p>
+  </div>
+  <div class="lookbox__nav">
+    <button id="lookPrev" data-cursor="link"><i aria-hidden="true">←</i><span>PRETHODNO</span></button>
+    <button id="lookNext" data-cursor="link"><span>SLEDEĆE</span><i aria-hidden="true">→</i></button>
+  </div>
+</div>
+
+<!-- ============================================================
+     SCRIPTS
+============================================================ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Flip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
