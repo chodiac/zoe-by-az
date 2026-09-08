@@ -715,29 +715,89 @@
   }
 
   /* ----------------------------------------------------------
-     VALUES — sticky number, word rises, media reveals,
-     continuous hand-off between values.
+     VALUES (Section 8 · 05 — NAČELA) — pinned VERTICAL card stack.
+     Existing design/text/colour untouched. As you scroll down each
+     card rises from below the stage and settles over the previous
+     one; scrolling up reverses it exactly. Purely vertical (y only).
   ---------------------------------------------------------- */
   function initValues() {
-    document.querySelectorAll(".value").forEach((v) => {
-      const word = v.querySelector(".value__word span");
-      const desc = v.querySelector(".value__desc");
-      const num = v.querySelector(".value__num");
-      if (REDUCED) { gsap.set(word, { yPercent: 0 }); return; }
+    const section = document.getElementById("values");
+    const stage = section && section.querySelector("[data-values]");
+    if (!section || !stage) return;
+    const cards = gsap.utils.toArray(stage.querySelectorAll(".value"));
+    if (cards.length < 2) return;
 
-      gsap.set(word, { yPercent: 110 });
-      gsap.timeline({
-        scrollTrigger: { trigger: v, start: "top 70%", end: "top 20%", scrub: 1 },
-      })
-        .to(word, { yPercent: 0, ease: "power3.out" }, 0)
-        .from(desc, { opacity: 0, y: 24, ease: "power2.out" }, 0.25)
-        .from(num, { opacity: 0, x: -12, ease: "none" }, 0);
+    // The giant word is just part of the card now — make sure it reads,
+    // and neutralise the per-card media clip-reveal so nothing fights
+    // the stack transforms (scoped entirely to Section 8's elements).
+    cards.forEach((c) => {
+      // initTextReveals() pre-hides every .line>span (yPercent:110); the old
+      // per-value reveal used to bring it back — reset it here so the word shows.
+      gsap.set(c.querySelectorAll(".value__word .line > span"), { yPercent: 0, clearProps: "transform" });
+      const fig = c.querySelector(".value__media");
+      if (!fig) return;
+      ScrollTrigger.getAll().forEach((st) => { if (st.trigger === fig) st.kill(); });
+      const inner = fig.querySelector(".media__inner");
+      gsap.set(fig, { clearProps: "clipPath" });
+      if (inner) gsap.set(inner, { clearProps: "transform,scale" });
+    });
 
-      // slight exit drift
-      gsap.to(word, {
-        yPercent: -18, ease: "none",
-        scrollTrigger: { trigger: v, start: "bottom 70%", end: "bottom top", scrub: 1 },
+    if (REDUCED) return; // leave Section 8 as a plain vertical read
+
+    const n = cards.length;
+
+    mm.add({ isDesktop: DESKTOP, isMobile: MOBILE }, (ctx) => {
+      const isMobile = ctx.conditions.isMobile;
+      const OFFSET = isMobile ? 16 : 26;      // px of visible stack peek (15–35)
+      const RECEDE_SCALE = 0.015;             // per depth level (subtle)
+      const RECEDE_FADE = isMobile ? 0.08 : 0.12;
+
+      section.classList.add("is-stack");
+
+      // initial state: card 0 in place, the rest waiting below the stage
+      cards.forEach((c, i) => {
+        gsap.set(c, {
+          zIndex: i + 1,
+          transformOrigin: "center top",
+          yPercent: i === 0 ? 0 : 120,
+          y: 0, scale: 1, autoAlpha: 1,
+        });
       });
+
+      // ONE scrubbed timeline; scroll progress drives the whole sequence
+      const tl = gsap.timeline({
+        defaults: { ease: "none" },
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: () => "+=" + Math.round(window.innerHeight * n * 0.8),
+          pin: true,
+          scrub: 1,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      for (let i = 1; i < n; i++) {
+        const at = i - 1;                                   // step slot
+        tl.to(cards[i], { yPercent: 0, y: i * OFFSET, ease: "power2.out", duration: 1 }, at);
+        for (let j = 0; j < i; j++) {
+          const depth = i - j;                             // levels behind the front
+          tl.to(cards[j], {
+            scale: 1 - depth * RECEDE_SCALE,
+            autoAlpha: Math.max(0.55, 1 - depth * RECEDE_FADE),
+            ease: "power1.out", duration: 1,
+          }, at);
+        }
+      }
+      tl.to({}, { duration: 0.5 });                         // hold before unpin
+
+      return () => {
+        section.classList.remove("is-stack");
+        cards.forEach((c) => gsap.set(c, {
+          clearProps: "transform,opacity,visibility,zIndex,scale,translate",
+        }));
+      };
     });
   }
 

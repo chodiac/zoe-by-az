@@ -690,6 +690,43 @@ section{position:relative}
 .value__desc{grid-area:desc}
 .value__media{grid-area:media}
 
+/* Section 8 · vertical card-stack — activated by JS (.is-stack).
+   Structural only: position / overflow / z-index / transform-origin.
+   Card design, typography, colour, text and spacing are unchanged;
+   the background is made explicit (same ivory) and a whisper of
+   shadow gives the stack physical depth. */
+.values.is-stack{
+  min-height:100svh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  overflow:hidden;
+}
+.values.is-stack .values__list{
+  position:relative;
+  align-self:stretch;
+  height:min(72svh,760px);
+  margin-top:clamp(20px,3vh,40px);
+}
+.values.is-stack .value{
+  position:absolute;
+  inset:0;
+  min-height:0;
+  height:100%;
+  margin:0;
+  background:var(--ivory);
+  transform-origin:center top;
+  box-shadow:0 -10px 44px -20px rgba(24,24,22,.16);
+  will-change:transform;
+  backface-visibility:hidden;
+}
+.values.is-stack .value__num{position:static}
+@media (max-width:1100px){
+  .values.is-stack .values__list{height:78svh}
+  .values.is-stack .value{padding-top:8vh;padding-bottom:8vh;overflow:hidden}
+  .values.is-stack .value__media{margin-top:3vh;width:min(66vw,340px)}
+}
+
 /* ---------- 15 · TYPOGRAPHIC INTERLUDE ---------- */
 .interlude{
   background:var(--ink);color:var(--ivory);
