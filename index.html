@@ -183,21 +183,26 @@
        03 — EDITORIAL FLOATING MEDIA
   ======================================================== -->
   <section class="editorial" id="editorial" data-index="3" data-bg="#EFE9DF">
-    <p class="editorial__tag label"><span>POGLED IZBLIZA</span><span>A CLOSER LOOK</span></p>
+    <!-- scene = the sticky's containing block: tag + heading float over
+         figs a–c, then release at the scene edge, BEFORE the note -->
+    <div class="editorial__scene">
+      <p class="editorial__tag label"><span>POGLED IZBLIZA</span><span>A CLOSER LOOK</span></p>
 
-    <div class="editorial__sticky">
-      <h3 class="editorial__head">
-        <span class="line"><span>Silueta ima</span></span>
-        <span class="line"><span><em>svoj jezik.</em></span></span>
-      </h3>
+      <div class="editorial__sticky">
+        <h3 class="editorial__head">
+          <span class="line"><span>Silueta ima</span></span>
+          <span class="line"><span><em>svoj jezik.</em></span></span>
+        </h3>
+      </div>
+
+      <!-- EDITORIAL_01 — portrait detail — recommended 1400×1750 -->
+      <figure class="editorial__fig editorial__fig--a media" data-media="EDITORIAL_01" data-dim="1400×1750" data-ratio="4 / 5" data-reveal="up" data-parallax="-9" data-cursor="view"></figure>
+      <!-- EDITORIAL_02 — tall campaign — recommended 1200×1800 -->
+      <figure class="editorial__fig editorial__fig--b media" data-media="EDITORIAL_02" data-dim="1200×1800" data-ratio="2 / 3" data-reveal="up" data-parallax="6" data-cursor="view"></figure>
+      <!-- EDITORIAL_03 — fabric / detail crop — recommended 1200×1200 -->
+      <figure class="editorial__fig editorial__fig--c media" data-media="EDITORIAL_03" data-dim="1200×1200" data-ratio="1 / 1" data-reveal="left" data-parallax="-5" data-cursor="view"></figure>
     </div>
 
-    <!-- EDITORIAL_01 — portrait detail — recommended 1400×1750 -->
-    <figure class="editorial__fig editorial__fig--a media" data-media="EDITORIAL_01" data-dim="1400×1750" data-ratio="4 / 5" data-reveal="up" data-parallax="-9" data-cursor="view"></figure>
-    <!-- EDITORIAL_02 — tall campaign — recommended 1200×1800 -->
-    <figure class="editorial__fig editorial__fig--b media" data-media="EDITORIAL_02" data-dim="1200×1800" data-ratio="2 / 3" data-reveal="up" data-parallax="6" data-cursor="view"></figure>
-    <!-- EDITORIAL_03 — fabric / detail crop — recommended 1200×1200 -->
-    <figure class="editorial__fig editorial__fig--c media" data-media="EDITORIAL_03" data-dim="1200×1200" data-ratio="1 / 1" data-reveal="left" data-parallax="-5" data-cursor="view"></figure>
     <!-- EDITORIAL_04 — wide campaign frame — recommended 2400×1400 -->
     <figure class="editorial__fig editorial__fig--d media" data-media="EDITORIAL_04" data-dim="2400×1400" data-ratio="12 / 7" data-reveal="up" data-parallax="4" data-cursor="view"></figure>
 

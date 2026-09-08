@@ -507,7 +507,11 @@ section{position:relative}
   padding:clamp(80px,14vh,200px) var(--pad);
   max-width:var(--maxw);margin:0 auto;
 }
-.editorial__tag{position:sticky;top:clamp(90px,12vh,140px)}
+/* .editorial__scene is the sticky containing block: the tag + heading
+   stick through figs a–c, then release at the scene edge — they can't
+   escape into .editorial__note or the next section. */
+.editorial__scene{position:relative}
+.editorial__tag{position:sticky;top:clamp(90px,12vh,140px);z-index:3}
 .editorial__sticky{
   position:sticky;top:38svh;
   z-index:2;pointer-events:none;
@@ -610,7 +614,7 @@ section{position:relative}
 
 /* ---------- 13 · FOUNDER ---------- */
 .founder{
-  padding:clamp(60px,10vh,140px) 0;
+  padding:0;               /* stage must own the full viewport while pinned */
   overflow:hidden;
 }
 .founder__stage{
@@ -632,12 +636,12 @@ section{position:relative}
 .founder__name--last{z-index:1;color:var(--taupe)}
 .founder__portrait{
   position:relative;z-index:2;
-  width:min(30vw,380px);aspect-ratio:8/11;
+  width:min(42vw,540px,56svh);aspect-ratio:8/11;
 }
 .founder__portrait .media__inner{height:120%;top:-10%}
 .founder__copy{
   max-width:var(--maxw);margin:0 auto;
-  padding:clamp(50px,10vh,120px) var(--pad) 0;
+  padding:clamp(50px,10vh,120px) var(--pad) clamp(60px,12vh,150px);
   display:flex;flex-direction:column;gap:clamp(24px,4vh,40px);
 }
 .founder__lead{
@@ -676,7 +680,7 @@ section{position:relative}
   grid-column:2;
 }
 .value__media{
-  width:min(24vw,300px);aspect-ratio:4/5;align-self:center;
+  width:min(36vw,460px,58svh);aspect-ratio:4/5;align-self:center;
 }
 
 /* stagger desc below word */
@@ -969,18 +973,32 @@ section{position:relative}
 /* ---------- 23 · RESPONSIVE ---------- */
 @media (max-width:1100px){
   .nav__links{display:none}
-  .woman__sticky{max-width:100%}
-  .woman__media{position:relative;right:auto;top:auto;width:70vw;margin:8vh 0 0 auto}
+  /* woman: text stacks above the image, no sticky overlap on narrow screens */
   .woman{min-height:auto}
+  .woman__sticky{position:static;top:auto;max-width:100%}
+  .woman__media{position:relative;right:auto;top:auto;width:min(78vw,520px);margin:9vh 0 0 auto}
   .editorial__fig--a,.editorial__fig--b,.editorial__fig--c,.editorial__fig--d{
     width:min(70vw,520px);margin-left:auto;margin-right:0;
   }
   .editorial__fig--c{margin-left:0}
-  .editorial__sticky{position:relative;top:auto;margin:8vh 0}
-  .value{grid-template-columns:auto 1fr;grid-template-areas:"num word" "num desc";min-height:auto;padding-top:12vh;padding-bottom:12vh}
-  .value__media{display:none}
-  .seq__stage{grid-template-columns:1fr;justify-items:center;text-align:center;gap:30px;height:auto;padding:16vh var(--pad)}
-  .seq__frame{width:min(70vw,380px)}
+  .editorial__sticky{margin:8vh 0}
+  /* founder portrait — large on tablet/phone too (brief: keep it big) */
+  .founder__portrait{width:min(80vw,460px)}
+  .founder__name{font-size:clamp(2.4rem,14vw,6.5rem)}
+  /* values keep their image on mobile, full-width under the word */
+  .value{grid-template-columns:auto 1fr;grid-template-areas:"num word" "num desc" "media media";min-height:auto;padding-top:12vh;padding-bottom:12vh;gap:clamp(20px,4vw,40px) clamp(24px,6vw,60px)}
+  .value__media{display:block;width:min(88vw,520px);margin-top:6vh;justify-self:start}
+  /* selected looks: the 12-col editorial grid collapses to a clean
+     2-up on tablet — no negative-margin overlaps */
+  .looks__grid{grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,44px);align-items:start}
+  .look--1,.look--2,.look--3,.look--4,.look--5,.look--6,.look--7{
+    grid-column:auto;margin-top:0;align-self:auto;
+  }
+  .look--4{grid-column:1 / -1;aspect-ratio:8/5}
+  .look--1{margin-top:6vh}
+  .look--5{margin-top:8vh}
+  .seq__stage{grid-template-columns:1fr;justify-items:center;align-content:center;text-align:center;gap:28px;min-height:100svh;height:auto;padding:14vh var(--pad)}
+  .seq__frame{width:min(68vw,340px)}
   .form{grid-template-columns:1fr}
   .lookbox{grid-template-columns:1fr;grid-template-rows:1fr auto}
   .lookbox__info{padding:0 clamp(24px,6vw,50px) clamp(40px,8vh,80px)}
@@ -997,6 +1015,11 @@ section{position:relative}
   .slide{grid-template-columns:1fr;width:80vw;gap:24px}
   .slide--b .slide__media{order:0}
   .slide__media{aspect-ratio:3/4}
+  /* looks: single column on phones */
+  .looks__grid{grid-template-columns:1fr;gap:clamp(28px,10vw,56px)}
+  .look--1,.look--5{margin-top:0}
+  .look--2{width:72%}
+  .look--7{width:66%;justify-self:end}
   .atelier__row{grid-template-columns:1fr;gap:30px}
   .atelier__fig:nth-child(n){margin-top:0}
   .atelier__fig{aspect-ratio:3/4}
